@@ -1,0 +1,24 @@
+#tabs {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+}
+
+#header{
+  display: flex;
+  width: 100%;
+}
+
+#header div {
+  padding: 10px 20px;
+  background: lightgray;
+  flex-grow: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

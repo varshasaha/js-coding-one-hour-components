@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Test</title>
+        <link rel="stylesheet" type="text/css" href="screen.css">
+    </head>
+    <body>
+        <form>
+            <div id="tabs">
+                <div id="header">
+                    <div data-child="days-of-the-week">
+                        Days of the week
+                    </div>
+                    <div data-child="date-picker">
+                        Date picker
+                    </div>
+                    <div data-child="user-input">
+                        User Input
+                    </div>
+                </div>
+                <div id="content">
+                    <div class="tab-content" id="days-of-the-week">
+                        <input type="checkbox" value="MON"> Monday
+                        <input type="checkbox" value="TUE"> Tuesday
+                        <input type="checkbox" value="WED"> Wednesday
+                        <input type="checkbox" value="THU"> Thursday
+                        <input type="checkbox" value="FRI"> Friday
+                        <input type="checkbox" value="SAT"> Saturday
+                        <input type="checkbox" value="SUN"> Sunday
+                    </div>
+                    <div class="tab-content" id="date-picker">
+                        <input type="hidden" value="" id="date">
+                        <select id='date-input'>
+                        </select>
+                        <select id='month-input'>
+                        </select>
+                        <select id='year-input'>
+                        </select>
+                    </div>
+                    <div class="tab-content" id="user-input">
+                        <!-- parse it to fields above -->
+                        <input type="text" value="" id="input">
+                    </div>
+                </div>
+            </div>
+ 
+            <input type="submit" value="Run" id="submit">
+ 
+            <!-- final format: MON,TUE,FRI or 05/12/2011 -->
+            <input type="text" value="" id="result" placeholder="Result">
+        </form>
+    <script src="main.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>
