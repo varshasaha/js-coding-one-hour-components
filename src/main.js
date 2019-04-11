@@ -1,26 +1,26 @@
 (function(){
-  const selectedDays = [];
-  const selectedDatePicker = [];
   let selectedTabId = null;
   const tabValues = {
     'days-of-the-week': () => {
-      return getSelectedDays();
+      const inputs = document.querySelectorAll('#days-of-the-week input');
+      let result = '';
+      inputs.forEach(input => {
+        if(input.checked) { result = result + " " + input.value; };
+      })
+      return result;
     },
     'date-picker': () => {
-      return getSelectedDatePicker();
+      const selects = document.querySelectorAll('#date-picker select');
+      let result = '';
+      selects.forEach((select, index) => {
+        result = `${result}${select.value}${index < selects.length - 1 ? '/' : ''}`;
+      })
+      return result;
     },
     'user-input': ''
   };
 
   const resultInput = document.getElementById('result');
-
-  const getSelectedDays = () => {
-    return selectedDays.join(',');
-  }
-
-  const getSelectedDatePicker = () => {
-    return selectedDatePicker.join('/');
-  }
 
   // selects the given content while hiding the others
   const selectTab = (id) => {
@@ -60,38 +60,6 @@
     });
   }
 
-  const attachCheckboxEventListeners = () => {
-    // attach event listener to checkboxes
-    const daysOfTheWeek = document.getElementById('days-of-the-week');
-    daysOfTheWeek.addEventListener('click', (e) => {
-      if(e.target.checked) {
-        selectedDays.push(e.target.value);
-      } else {
-        const index = selectedDays.indexOf(e.target.value);
-        selectedDays.splice(index, 1);
-      }
-    });
-  }
-
-  const attachSelectEventListeners = () => {
-    // attach event listener to date-picker
-    const selects = document.querySelectorAll('select');
-    selects.forEach(select => {
-      select.addEventListener('change', (e) => {
-        const target = e.target;
-        if(e.target.getAttribute('id') === 'date-input'){
-          selectedDatePicker[0] = e.target.value;
-        }
-        if(e.target.getAttribute('id') === 'month-input'){
-          selectedDatePicker[1] = e.target.value;
-        }
-        if(e.target.getAttribute('id') === 'year-input'){
-          selectedDatePicker[2] = e.target.value;
-        }
-      });
-    });
-  }
-
   const attachFormSubmitEventListeners = () => {
     // attach submit form
     const form = document.querySelector('form');
@@ -107,8 +75,6 @@
     // select first tab
     selectTab("days-of-the-week");
     attachTabEventListener();
-    attachCheckboxEventListeners();
-    attachSelectEventListeners();
     attachFormSubmitEventListeners();
 
     // find current date
@@ -116,9 +82,6 @@
     const date = today.getDate();
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
-    selectedDatePicker[0] = date;
-    selectedDatePicker[1] = month;
-    selectedDatePicker[2] = year;
 
     // add values in options in tab content
     populateDatePicker('date-input', start = 1, end = 31, date);
